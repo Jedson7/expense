@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Home</title>
+    <style>
+    <!-- styles body -->
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header { 
+            background-color: #4CAF50; 
+            color: white; 
+            padding: 1rem; 
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main { 
+            flex: 1;
+            height:540px;
+            width :100%;
+            display: flex;
+            align-items: stretch;
+        }
+        .content-wrapper {
+            display: flex;
+            width: 100%;
+        }
+        .image-container {
+            flex: 2;  /* Increased from 1 to 2 */
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+        }
+        .text-container {
+            flex: 1;  /* Kept as 1, which makes it narrower relative to the image */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        } 
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        footer { 
+            background-color: #333; 
+            color: white; 
+            padding: 1rem; 
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Expense Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add_expense.html">Add Expense</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="expense_chart.html">Expense Chart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="image-container">
+                <img src="expense.jpg" alt="Expense tracking illustration" />
+            </div>
+            <div class="text-container">
+                <h2>Welcome to Expense Tracker</h2>
+                <p>Take control of your finances with our easy-to-use expense tracking tool. Start managing your money more effectively today!</p>
+                <a href="add_expense.html" class="button">Get Started</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Expense Tracker. All rights reserved.</p>
+    </footer>
+</body>
+</html>

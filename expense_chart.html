@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Expense Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header { 
+            background-color: #4CAF50; 
+            color: white; 
+            padding: 1rem; 
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main { 
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 600px;
+        }
+        footer { 
+            background-color: #333; 
+            color: white; 
+            padding: 1rem; 
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Expense Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add_expense.html">Add Expense</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="expense_chart.html">Expense Chart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="chart-container">
+            <canvas id="expenseChart"></canvas>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Expense Tracker. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function getExpenseData() {
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            const categoryTotals = expenses.reduce((totals, expense) => {
+                if (!totals[expense.category]) {
+                    totals[expense.category] = 0;
+                }
+                totals[expense.category] += expense.amount;
+                return totals;
+            }, {});
+
+            const labels = Object.keys(categoryTotals);
+            const data = Object.values(categoryTotals);
+
+            return { labels, data };
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            const { labels, data } = getExpenseData();
+
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56',
+                            '#4BC0C0',
+                            '#9966FF'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Expenses by Category'
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        createChart();
+    </script>
+</body>
+</html>
